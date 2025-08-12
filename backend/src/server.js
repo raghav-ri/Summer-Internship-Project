@@ -3,24 +3,29 @@ import cors from "cors";
 import notesRoutes from "./routes/notesRoutes.js";
 import { connectDB } from './config/db.js';
 import rateLimiter from './middleware/rateLimiter.js';
+import path from "path";
 import dotenv from 'dotenv';
 
 
 dotenv.config();
 
-const app = express()
-connectDB();
+const app = express();
+// const PORT = process.env.PORT || 5000;
+const __dirname = path.resolve();
 
 
-app.use(cors(
-    {
-        origin: "http://localhost:5173",
-    }
-));
+if (process.env.NODE_ENV !== "production") {
+  app.use(
+    cors({
+      origin: "http://localhost:5173",
+    })
+  );
+}
 
 
 app.use(express.json()); // this is middleware
 // Middleware to log request details
+
 
 
 
@@ -32,7 +37,22 @@ app.use(express.json()); // this is middleware
 
 
 
-app.use("/api/routes",notesRoutes);
+app.use("/api/routes", notesRoutes);
+
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../frontend/dist")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
+  });
+}
+
+
+
+
+connectDB()
+
 
 
 
