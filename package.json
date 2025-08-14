@@ -4,18 +4,14 @@
   "main": "index.js",
   "scripts": {
     "build": "npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend",
-    "start": "npm run build && npm run start --prefix backend"
+    "start": "npm run start --prefix backend"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/raghav-ri/Summer-Internship-Project.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/raghav-ri/Summer-Internship-Project/issues"
   },
-  "homepage": "https://github.com/raghav-ri/Summer-Internship-Project#readme",
-  "description": ""
+  "homepage": "https://github.com/raghav-ri/Summer-Internship-Project#readme"
 }
